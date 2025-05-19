@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<title>Painel de Mini Programas</title>
+<style>
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: linear-gradient(130deg, #d9d9d9 0%, #8ec5fc 25%, #e0c3fc 50%, #d9d9d9 75%, #c3cbdc 100%);
+  background-size: 400% 400%;
+  animation: shimmerMetalBackground 40s linear infinite;
+  filter: blur(1.2px) brightness(1.05);
+}
+
+@keyframes shimmerMetalBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: linear-gradient(
+    135deg,
+    rgba(220, 220, 220, 0.4),
+    rgba(142, 197, 252, 0.25),
+    rgba(224, 195, 252, 0.25),
+    rgba(220, 220, 220, 0.4)
+  );
+  background-size: 400% 400%;
+  animation: fundoMetalicoReflexo 60s linear infinite;
+  filter: blur(0.5px);
+}
+
+@keyframes fundoMetalicoReflexo {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+    body {
+      background: #1e2330;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #20232a;
+      min-height: 100vh;
+      overflow-x: hidden;
+    
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+
+  background: linear-gradient(
+    135deg,
+    rgba(220, 220, 220, 0.4),
+    rgba(142, 197, 252, 0.25),
+    rgba(224, 195, 252, 0.25),
+    rgba(220, 220, 220, 0.4)
+  );
+  background-size: 400% 400%;
+  animation: fundoMetalicoReflexo 60s linear infinite;
+  filter: brightness(1.05) contrast(1.02);
+}
+    .container-main {
+      display: flex;
+      height: 100vh;
+      align-items: stretch;
+    }
+    .sidebar {
+      width: 210px;
+      background: linear-gradient(110deg, #80f3decc 0%, #e5fffd66 100%);
+      border-right: 2px solid #7ee9c1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 28px 0 0 0;
+      height: 160vh;
+      z-index: 10;
+      position: relative;
+      box-shadow: 2px 0 18px #1ae9c020;
+      backdrop-filter: blur(2px);
+    
+  padding-bottom: 0px;
+}
+    .sidebar-title {
+      font-size: 1.13rem;
+      color: #f5faf9;
+      font-weight: 700;
+      margin: 0 0 18px 36px;
+      letter-spacing: 1px;
+      text-shadow: 0 0 4px #0a0229;
+    }
+    .menu-btn {
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      padding: 5px 28px;
+      font-size: 14px;
+      color: #0a1d3b;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s;
+    
+  margin-bottom: 0px;
+}
+    .menu-btn.active, .menu-btn:hover {
+      background: #ccfbf6dd;
+      color: #11d1b5;
+      border-left: 4px solid #80f3de;
+    }
+    .main-panel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      position: relative;
+      min-width: 320px;
+    
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+
+  min-height: calc(100vh - 60px);
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+  height: auto;
+}
+    .program-panel {
+      margin-left: 64px;
+      background: #f5f8fb;
+      border-radius: 18px;
+      box-shadow: 0 0 22px #b3bacd30, 0 0 0px 1.5px #e2e9f150;
+      min-width: 260px;
+      max-width: 290px;
+      min-height: 340px;
+      padding: 34px 20px 18px 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      border: 1.5px solid #dee6f0;
+      position: relative;
+      z-index: 2;
+      transition: box-shadow 0.22s;
+    }
+    .program-title {
+      font-size: 1.17rem;
+      font-weight: 700;
+      color: #17e4c2;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+      text-shadow: none;
+    }
+    
+
+
+.code-btn {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 12px;
+  background-image: linear-gradient(to right, #20e3b2, #2cccff);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  z-index: 1;
+}
+
+
+
+    .code-btn.active, .code-btn:hover {
+      background: linear-gradient(90deg, #19c4a3 0%, #7ee9c1 100%);
+      color: #fff;
+      border-color: #81efd6;
+    }
+    .program-form label {
+      font-size: 0.96rem;
+      margin-bottom: 6px;
+      color: #347f8e;
+      display: block;
+      font-weight: 500;
+    }
+    .program-form input {
+      width: 92%;
+      padding: 8px 8px;
+      border-radius: 8px;
+      border: 1.2px solid #b5c7d2;
+      background: #f5fafd;
+      color: #243241;
+      font-size: 1.03rem;
+      margin-bottom: 12px;
+      outline: none;
+      font-weight: 400;
+      transition: border-color 0.15s;
+    }
+    .program-form input:focus {
+      border-color: #17e4c2;
+    }
+    .program-form button {
+      padding: 7px 20px;
+      border-radius: 7px;
+      border: none;
+      background: linear-gradient(90deg, #84e6d6, #b49fff, #98d3fc);
+      color: #1a2440;
+      font-weight: 600;
+      font-size: 1.01rem;
+      cursor: pointer;
+      box-shadow: 0 0 10px #7e9fff20;
+      transition: background 0.13s, transform 0.13s;
+    }
+    .program-form button:hover {
+      background: linear-gradient(90deg, #b49fff, #84e6d6, #98d3fc);
+      transform: scale(1.04);
+    }
+    .program-output {
+      margin-top: 97px;
+      color: #3b526a;
+      font-size: 1.03rem;
+      min-height: 23px;
+      font-weight: 500;
+      word-break: break-word;
+    }
+    
+
+.code-box {
+  display: none;
+  background: #15191f;
+  color: #fff;
+  font-size: 0.95em;
+  border-radius: 12px;
+  padding: 18px 24px;
+  box-shadow: 0 0 60px #41e6c455, 0 0 0px 1.5px #b49fff30;
+  border: 1.2px solid #41e6c466;
+  white-space: pre-line;
+  z-index: 9999;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-weight: 400;
+  line-height: 1.17;
+  opacity: 0.99;
+  overflow-x: auto;
+  animation: codefade 0.4s;
+  transition: box-shadow 0.16s, opacity 0.18s;
+  word-break: break-word;
+  max-width: 480px;
+  min-width: 280px;
+  position: absolute;
+  left: calc(64px + 290px + 80px); /* desloca mais ainda */
+  top: 97px;
+}
+
+
+    .code-box.active {
+      display: block;
+    }
+    @keyframes codefade {
+      from { opacity: 0; transform: translateY(10px);}
+      to { opacity: 0.99; transform: translateY(0);}
+    }
+    @media (max-width: 900px) {
+      
+
+.code-box {
+  display: none;
+  background: #15191f;
+  color: #fff;
+  font-size: 0.95em;
+  border-radius: 12px;
+  padding: 18px 24px;
+  box-shadow: 0 0 60px #41e6c455, 0 0 0px 1.5px #b49fff30;
+  border: 1.2px solid #41e6c466;
+  white-space: pre-line;
+  z-index: 9999;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-weight: 400;
+  line-height: 1.17;
+  opacity: 0.99;
+  overflow-x: auto;
+  animation: codefade 0.4s;
+  transition: box-shadow 0.16s, opacity 0.18s;
+  word-break: break-word;
+  max-width: 480px;
+  min-width: 280px;
+  position: absolute;
+  left: calc(64px + 290px + 80px); /* desloca mais ainda */
+  top: 97px;
+}
+
+
+    }
+  
+
+
+
+.code-box {
+  display: none;
+  background: #15191f;
+  color: #fff;
+  font-size: 0.95em;
+  border-radius: 12px;
+  padding: 18px 24px;
+  box-shadow: 0 0 60px #41e6c455, 0 0 0px 1.5px #b49fff30;
+  border: 1.2px solid #41e6c466;
+  white-space: pre-line;
+  z-index: 9999;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-weight: 400;
+  line-height: 1.17;
+  opacity: 0.99;
+  overflow-x: auto;
+  animation: codefade 0.4s;
+  transition: box-shadow 0.16s, opacity 0.18s;
+  word-break: break-word;
+  max-width: 480px;
+  min-width: 280px;
+  position: absolute;
+  left: calc(64px + 290px + 80px); /* desloca mais ainda */
+  top: 97px;
+}
+
+
+</style>
+</head>
+<body>
+<div class="youtube-bg-container">
+  <iframe src="https://www.youtube.com/embed/-tTglFYF1wo?autoplay=1&mute=1&controls=0&loop=1&playlist=-tTglFYF1wo&modestbranding=1&showinfo=0&rel=0" frameborder="0" allow="autoplay; fullscreen"
+    allowfullscreen muted
+    style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none;"></iframe>
+</div>
+<div class="container-main">
+<!-- Sidebar Menu -->
+<nav class="sidebar">
+<div class="sidebar-title">Mini Programas</div>
+<button class="menu-btn active" onclick="showPanel(0)">Tabuada</button>
+<button class="menu-btn" onclick="showPanel(1)">Faixa Etária</button>
+<button class="menu-btn" onclick="showPanel(2)">Ano Bissexto</button>
+<button class="menu-btn" onclick="showPanel(3)">Positivo, Negativo ou Zero</button>
+<button class="menu-btn" onclick="showPanel(4)">Média Aritmética</button>
+<button class="menu-btn" onclick="showPanel(5)">Par ou Ímpar</button><button class="menu-btn" onclick="showPanel(6)">Classificação da Nota</button><button class="menu-btn" onclick="showPanel(7)">Tipo de Triângulo</button><button class="menu-btn" onclick="showPanel(8)">Custo das Maçãs</button><button class="menu-btn" onclick="showPanel(9)">Ordem Crescente</button><button class="menu-btn" onclick="showPanel(10)">Contagem Regressiva</button><button class="menu-btn" onclick="showPanel(11)">Repetir Número 10x</button><button class="menu-btn" onclick="showPanel(12)">Soma de 5 Números</button><button class="menu-btn" onclick="showPanel(13)">Fatorial</button><button class="menu-btn" onclick="showPanel(14)">Sequência de Fibonacci</button>
+<div class="sidebar-footer">
+  <hr style="border-color: rgba(255,255,255,0.1); margin: 8px 0;">
+  <div style="font-size: 11px; color: #ffffffa8; padding: 6px 10px;">
+    Paula Dantas de Oliveira Pelizer<br>
+    Codifica | +prati<br>
+    19/05/2025
+  </div>
+</div>
+</nav>
+<!-- Main Content Panel -->
+<div class="main-panel" style="flex-direction: row; position:relative;">
+<!-- Painel dos programas -->
+<div class="program-panel" id="prog-tabuada">
+<button class="code-btn" id="code-btn-0" onclick="toggleCode(0);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Tabuada</div>
+<form class="program-form" onsubmit="tabuada(event)">
+<label for="tabuada-num">Informe um número:</label>
+<input id="tabuada-num" placeholder="Ex: 7" required="" type="number"/>
+<button type="submit">Mostrar Tabuada</button>
+</form>
+<div class="program-output" id="tabuada-output"></div>
+</div>
+<div class="program-panel" id="prog-faixa" style="display:none;">
+<button class="code-btn" id="code-btn-1" onclick="toggleCode(1);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Faixa Etária</div>
+<form class="program-form" onsubmit="faixaEtaria(event)">
+<label for="faixa-idade">Informe a idade:</label>
+<input id="faixa-idade" min="0" placeholder="Ex: 15" required="" type="number"/>
+<button type="submit">Verificar Faixa</button>
+</form>
+<div class="program-output" id="faixa-output"></div>
+</div>
+<div class="program-panel" id="prog-bissexto" style="display:none;">
+<button class="code-btn" id="code-btn-2" onclick="toggleCode(2);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Ano Bissexto</div>
+<form class="program-form" onsubmit="bissexto(event)">
+<label for="bissexto-ano">Digite um ano:</label>
+<input id="bissexto-ano" placeholder="Ex: 2024" required="" type="number"/>
+<button type="submit">Verificar</button>
+</form>
+<div class="program-output" id="bissexto-output"></div>
+</div>
+<div class="program-panel" id="prog-positivo" style="display:none;">
+<button class="code-btn" id="code-btn-3" onclick="toggleCode(3);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Número: Positivo, Negativo ou Zero</div>
+<form class="program-form" onsubmit="positivoNegativo(event)">
+<label for="positivo-num">Digite um número:</label>
+<input id="positivo-num" placeholder="Ex: -2" required="" type="number"/>
+<button type="submit">Verificar</button>
+</form>
+<div class="program-output" id="positivo-output"></div>
+</div>
+<div class="program-panel" id="prog-media" style="display:none;">
+<button class="code-btn" id="code-btn-4" onclick="toggleCode(4);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Média Aritmética</div>
+<form class="program-form" id="form-media" onsubmit="adicionarNumero(event)">
+<label for="media-num">Digite um número (0 encerra):</label>
+<input id="media-num" placeholder="Ex: 10" required="" type="number"/>
+<button type="submit">Adicionar</button>
+</form>
+<div class="media-list" id="media-list" style="color:#19756c; font-size:0.98rem; min-height:24px; margin-bottom:10px;"></div>
+<button class="program-form" id="btn-calc-media" onclick="calcularMedia()" style="margin-top: 7px;" type="button">Calcular Média</button>
+<div class="program-output" id="media-output"></div>
+</div>
+<!-- Código fonte fixo e sempre na frente -->
+<div class="code-box" id="code-tabuada">
+// Tabuada
+const numero = parseInt(prompt('Digite o número para ver a tabuada: '));
+if (isNaN(numero)) {
+  console.log('Valor inválido. Por favor, digite um número.');
+} else {
+  let i = 1;
+  while (i &lt;= 10) {
+    console.log(`${numero} x ${i} = ${numero * i}`);
+    i++;
+  }
+}
+    </div>
+<div class="code-box" id="code-faixa">
+// Faixa Etária
+const idade = parseInt(prompt('Informe a idade: '));
+let faixaEtaria;
+if (isNaN(idade) || idade &lt; 0) {
+  faixaEtaria = 'Idade inválida';
+} else {
+  switch (true) {
+    case (idade &gt;= 0 &amp;&amp; idade &lt;= 12):
+      faixaEtaria = 'Criança';
+      break;
+    case (idade &gt;= 13 &amp;&amp; idade &lt;= 17):
+      faixaEtaria = 'Adolescente';
+      break;
+    case (idade &gt;= 18):
+      faixaEtaria = 'Adulto';
+      break;
+    default:
+      faixaEtaria = 'Idade não reconhecida';
+  }
+}
+console.log('Faixa etária: ' + faixaEtaria);
+    </div>
+<div class="code-box" id="code-bissexto">
+// Ano Bissexto
+const ano = parseInt(prompt('Digite um ano: '));
+if (isNaN(ano)) {
+  console.log('Valor inválido. Por favor, digite um ano.');
+} else if ((ano % 4 === 0 &amp;&amp; ano % 100 !== 0) || (ano % 400 === 0)) {
+  console.log(ano + ' é um ano bissexto.');
+} else {
+  console.log(ano + ' não é um ano bissexto.');
+}
+    </div>
+<div class="code-box" id="code-positivo">
+// Positivo, Negativo ou Zero
+const num1 = parseFloat(prompt('Digite um número: '));
+if (isNaN(num1)) {
+  console.log('Valor inválido. Por favor, digite um número.');
+} else if (num1 &gt; 0) {
+  console.log('Número positivo');
+} else if (num1 &lt; 0) {
+  console.log('Número negativo');
+} else {
+  console.log('Zero');
+}
+    </div>
+<div class="code-box" id="code-media">
+//Calcule a média aritmética de números inseridos até que o usuário digite 0
+let resposta;
+let soma = 0;
+let contador = 0;
+do {
+    resposta = Number(prompt('Informe um número (Para calcular a média final, digite 0): '));
+    if (resposta !== 0) {
+        soma += resposta;
+        contador++;
+    }
+} while (resposta !== 0);
+if (contador &gt; 0) {
+    let mediaFinal = soma / contador;
+    console.log(`A média final é: ${mediaFinal}`);
+} else {
+    console.log('Nenhum número válido foi inserido.');
+}
+    </div>
+<div class="program-panel" id="prog-par-impar" style="display:none;">
+<button class="code-btn" id="code-btn-5" onclick="toggleCode(5);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Par ou Ímpar</div>
+<form class="program-form" onsubmit="parImpar(event)">
+<label for="par-impar-input">Digite um número inteiro:</label>
+<input id="par-impar-input" placeholder="Ex: 7" required="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="par-impar-output"></div>
+</div><div class="code-box" id="code-par-impar">// Par ou Ímpar
+const num = parseInt(prompt("Digite um número:"));
+if (isNaN(num)) {
+  console.log("Entrada inválida.");
+} else {
+  console.log(num % 2 === 0 ? "Par" : "Ímpar");
+}</div><div class="program-panel" id="prog-nota-class" style="display:none;">
+<button class="code-btn" id="code-btn-6" onclick="toggleCode(6);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Classificação da Nota</div>
+<form class="program-form" onsubmit="classificaNota(event)">
+<label for="nota-class-input">Digite uma nota de 0 a 10:</label>
+<input id="nota-class-input" placeholder="Ex: 7.5" required="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="nota-class-output"></div>
+</div><div class="code-box" id="code-nota-class">// Classificação da Nota
+const nota = parseFloat(prompt("Digite uma nota de 0 a 10:"));
+if (isNaN(nota) || nota &lt; 0 || nota &gt; 10) {
+  console.log("Nota inválida");
+} else if (nota &gt;= 7) {
+  console.log("Aprovado");
+} else if (nota &gt;= 5) {
+  console.log("Recuperação");
+} else {
+  console.log("Reprovado");
+}</div><div class="program-panel" id="prog-tipo-triangulo" style="display:none;">
+<button class="code-btn" id="code-btn-7" onclick="toggleCode(7);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Tipo de Triângulo</div>
+<form class="program-form" onsubmit="tipoTriangulo(event)">
+<label for="tipo-triangulo-input">Digite os lados A,B,C separados por vírgula:</label>
+<input id="tipo-triangulo-input" placeholder="Ex: 3,4,5" required="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="tipo-triangulo-output"></div>
+</div><div class="code-box" id="code-tipo-triangulo">// Tipo de Triângulo
+const entrada = prompt("Digite os lados A,B,C separados por vírgula:");
+const [a,b,c] = entrada.split(",").map(Number);
+if (a+b&gt;c &amp;&amp; a+c&gt;b &amp;&amp; b+c&gt;a) {
+  if (a===b &amp;&amp; b===c) console.log("Equilátero");
+  else if (a===b || a===c || b===c) console.log("Isósceles");
+  else console.log("Escaleno");
+} else {
+  console.log("Não forma triângulo");
+}</div><div class="program-panel" id="prog-custo-macas" style="display:none;">
+<button class="code-btn" id="code-btn-8" onclick="toggleCode(8);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Custo das Maçãs</div>
+<form class="program-form" onsubmit="custoMacas(event)">
+<label for="custo-macas-input">Quantas maçãs foram compradas?</label>
+<input id="custo-macas-input" placeholder="Ex: 10" required="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="custo-macas-output"></div>
+</div><div class="code-box" id="code-custo-macas">// Custo das Maçãs
+const qtd = parseInt(prompt("Quantidade de maçãs:"));
+if (isNaN(qtd) || qtd &lt;= 0) {
+  console.log("Quantidade inválida");
+} else {
+  const preco = qtd &lt; 12 ? 0.30 : 0.25;
+  console.log("Total: R$" + (preco * qtd).toFixed(2));
+}</div><div class="program-panel" id="prog-ordem-crescente" style="display:none;">
+<button class="code-btn" id="code-btn-9" onclick="toggleCode(9);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Ordem Crescente</div>
+<form class="program-form" onsubmit="ordemCrescente(event)">
+<label for="ordem-crescente-input">Digite valores diferentes separados por vírgula:</label>
+<input id="ordem-crescente-input" placeholder="Ex: 9,2" required="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="ordem-crescente-output"></div>
+</div><div class="code-box" id="code-ordem-crescente">// Ordem Crescente
+const entrada = prompt("Digite dois valores separados por vírgula:");
+let [x,y] = entrada.split(",").map(Number);
+if (x === y) console.log("Valores iguais não permitidos.");
+else console.log([x,y].sort((a,b) =&gt; a-b).join(", "));</div><div class="program-panel" id="prog-contagem-regressiva" style="display:none;">
+<button class="code-btn" id="code-btn-10" onclick="toggleCode(10);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Contagem Regressiva</div>
+<form class="program-form" onsubmit="contagemRegressiva(event)">
+<label for="contagem-regressiva-input">Digite um número para iniciar a contagem regressiva:</label>
+<input id="contagem-regressiva-input" placeholder="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="contagem-regressiva-output"></div>
+</div><div class="code-box" id="code-contagem-regressiva">// Contagem Regressiva
+// Contagem Regressiva
+for (let i = 10; i &gt;= 1; i--) {
+  console.log(i);
+}</div><div class="program-panel" id="prog-repetir-numero" style="display:none;">
+<button class="code-btn" id="code-btn-11" onclick="toggleCode(11);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Repetir Número 10x</div>
+<form class="program-form" onsubmit="repetirNumero(event)">
+<label for="repetir-numero-input">Digite um número:</label>
+<input id="repetir-numero-input" placeholder="Ex: 5" required="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="repetir-numero-output"></div>
+</div><div class="code-box" id="code-repetir-numero">// Repetir Número 10x
+// Repetir número
+const num = parseInt(prompt("Digite um número:"));
+if (!isNaN(num)) {
+  for (let i = 0; i &lt; 10; i++) {
+    console.log(num);
+  }
+} else {
+  console.log("Número inválido.");
+}</div><div class="program-panel" id="prog-soma-cinco" style="display:none;">
+<button class="code-btn" id="code-btn-12" onclick="toggleCode(12);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Soma de 5 Números</div>
+<form class="program-form" onsubmit="somaCinco(event)">
+<label for="soma-cinco-input">Digite 5 números separados por vírgula:</label>
+<input id="soma-cinco-input" placeholder="Ex: 4,3,7,1,5" required="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="soma-cinco-output"></div>
+</div><div class="code-box" id="code-soma-cinco">// Soma de 5 Números
+// Soma de 5 Números
+let entrada = prompt("Digite 5 números separados por vírgula:");
+let valores = entrada.split(",").map(n =&gt; parseFloat(n));
+if (valores.length === 5 &amp;&amp; valores.every(n =&gt; !isNaN(n))) {
+  const soma = valores.reduce((acc, n) =&gt; acc + n, 0);
+  console.log("Soma total: " + soma);
+} else {
+  console.log("Entrada inválida.");
+}</div><div class="program-panel" id="prog-fatorial" style="display:none;">
+<button class="code-btn" id="code-btn-13" onclick="toggleCode(13);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Fatorial</div>
+<form class="program-form" onsubmit="calculaFatorial(event)">
+<label for="fatorial-input">Digite um número inteiro:</label>
+<input id="fatorial-input" placeholder="Ex: 5" required="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="fatorial-output"></div>
+</div><div class="code-box" id="code-fatorial">// Fatorial
+// Fatorial
+const num = parseInt(prompt("Digite um número inteiro:"));
+if (isNaN(num) || num &lt; 0) {
+  console.log("Número inválido.");
+} else {
+  let fat = 1;
+  for (let i = 2; i &lt;= num; i++) {
+    fat *= i;
+  }
+  console.log("Fatorial: " + fat);
+}</div><div class="program-panel" id="prog-fibonacci" style="display:none;">
+<button class="code-btn" id="code-btn-14" onclick="toggleCode(14);event.stopPropagation()" type="button">Ver código</button>
+<div class="program-title">Sequência de Fibonacci</div>
+<form class="program-form" onsubmit="gerarFibonacci(event)">
+<label for="fibonacci-input">Digite quantos números da sequência de Fibonacci devem ser exibidos:</label>
+<input id="fibonacci-input" placeholder="" type="text"/>
+<button type="submit">Executar</button>
+</form>
+<div class="program-output" id="fibonacci-output"></div>
+</div><div class="code-box" id="code-fibonacci">// Sequência de Fibonacci
+// Fibonacci
+let fib = [0, 1];
+for (let i = 2; i &lt; 10; i++) {
+  fib[i] = fib[i - 1] + fib[i - 2];
+}
+console.log(fib.join(", "));</div></div>
+</div>
+<script>
+let openCodeIdx = null;
+
+function showPanel(idx) {
+  const panels = [
+    document.getElementById('prog-tabuada'),
+    document.getElementById('prog-faixa'),
+    document.getElementById('prog-bissexto'),
+    document.getElementById('prog-positivo'),
+    document.getElementById('prog-media'),
+    document.getElementById('prog-par-impar'),
+    document.getElementById('prog-nota-class'),
+    document.getElementById('prog-tipo-triangulo'),
+    document.getElementById('prog-custo-macas'),
+    document.getElementById('prog-ordem-crescente'),
+    document.getElementById('prog-contagem-regressiva'),
+    document.getElementById('prog-repetir-numero'),
+    document.getElementById('prog-soma-cinco'),
+    document.getElementById('prog-fatorial'),
+    document.getElementById('prog-fibonacci')
+  ];
+  const codes = [
+    document.getElementById('code-tabuada'),
+    document.getElementById('code-faixa'),
+    document.getElementById('code-bissexto'),
+    document.getElementById('code-positivo'),
+    document.getElementById('code-media'),
+    document.getElementById('code-par-impar'),
+    document.getElementById('code-nota-class'),
+    document.getElementById('code-tipo-triangulo'),
+    document.getElementById('code-custo-macas'),
+    document.getElementById('code-ordem-crescente'),
+    document.getElementById('code-contagem-regressiva'),
+    document.getElementById('code-repetir-numero'),
+    document.getElementById('code-soma-cinco'),
+    document.getElementById('code-fatorial'),
+    document.getElementById('code-fibonacci')
+  ];
+  const btns = Array.from(document.querySelectorAll('.code-btn'));
+
+  document.querySelectorAll('.menu-btn').forEach((btn, i) => {
+    if(i === idx) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+  panels.forEach((el, i) => el.style.display = i === idx ? '' : 'none');
+  codes.forEach((el) => el.classList.remove('active'));
+  btns.forEach((btn) => btn.classList.remove('active'));
+  openCodeIdx = null;
+
+  if(idx === 4) {
+    listaNumeros = [];
+    fimInsercao = false;
+    document.getElementById('media-list').textContent = '';
+    document.getElementById('media-num').value = '';
+    document.getElementById('media-num').disabled = false;
+    document.getElementById('form-media').querySelector('button[type="submit"]').disabled = false;
+    document.getElementById('media-output').textContent = '';
+  }
+}
+
+function toggleCode(idx) {
+  const codes = [
+    document.getElementById('code-tabuada'),
+    document.getElementById('code-faixa'),
+    document.getElementById('code-bissexto'),
+    document.getElementById('code-positivo'),
+    document.getElementById('code-media'),
+    document.getElementById('code-par-impar'),
+    document.getElementById('code-nota-class'),
+    document.getElementById('code-tipo-triangulo'),
+    document.getElementById('code-custo-macas'),
+    document.getElementById('code-ordem-crescente'),
+    document.getElementById('code-contagem-regressiva'),
+    document.getElementById('code-repetir-numero'),
+    document.getElementById('code-soma-cinco'),
+    document.getElementById('code-fatorial'),
+    document.getElementById('code-fibonacci')
+  ];
+  const btns = Array.from(document.querySelectorAll('.code-btn'));
+  codes.forEach((el) => el.classList.remove('active'));
+  btns.forEach((btn) => btn.classList.remove('active'));
+  if (openCodeIdx === idx) {
+    openCodeIdx = null;
+    return;
+  }
+  codes[idx].classList.add('active');
+  btns[idx].classList.add('active');
+  openCodeIdx = idx;
+}
+
+showPanel(0);
+
+let listaNumeros = [];
+let fimInsercao = false;
+
+function adicionarNumero(event) {
+  event.preventDefault();
+  const input = document.getElementById('media-num');
+  const valor = Number(input.value);
+  if (fimInsercao) return;
+  if (valor === 0) {
+    fimInsercao = true;
+    input.value = '';
+    input.disabled = true;
+    document.getElementById('form-media').querySelector('button[type="submit"]').disabled = true;
+    atualizarLista();
+    return;
+  }
+  listaNumeros.push(valor);
+  atualizarLista();
+  input.value = '';
+  input.focus();
+}
+
+function atualizarLista() {
+  const mediaList = document.getElementById('media-list');
+  if (fimInsercao) {
+    mediaList.textContent = "Números inseridos: " + (listaNumeros.length ? listaNumeros.join(', ') : 'Nenhum') + " [Fim]";
+  } else {
+    mediaList.textContent = "Números inseridos: " + (listaNumeros.length ? listaNumeros.join(', ') : '');
+  }
+}
+
+function calcularMedia() {
+  const output = document.getElementById('media-output');
+  if (listaNumeros.length > 0) {
+    let soma = listaNumeros.reduce((acc, n) => acc + n, 0);
+    let media = soma / listaNumeros.length;
+    output.textContent = "A média é: " + media.toFixed(2);
+  } else {
+    output.textContent = "Nenhum número válido foi inserido.";
+  }
+}
+
+function parImpar(event) {
+  event.preventDefault();
+  const valor = parseInt(document.getElementById('par-impar-input').value);
+  const out = document.getElementById('par-impar-output');
+  if (isNaN(valor)) {
+    out.textContent = "Entrada inválida.";
+  } else {
+    out.textContent = valor % 2 === 0 ? "Par" : "Ímpar";
+  }
+}
+
+function classificaNota(event) {
+  event.preventDefault();
+  const valor = parseFloat(document.getElementById('nota-class-input').value);
+  const out = document.getElementById('nota-class-output');
+  if (isNaN(valor) || valor < 0 || valor > 10) {
+    out.textContent = "Nota inválida";
+  } else if (valor >= 7) {
+    out.textContent = "Aprovado";
+  } else if (valor >= 5) {
+    out.textContent = "Recuperação";
+  } else {
+    out.textContent = "Reprovado";
+  }
+}
+
+function tipoTriangulo(event) {
+  event.preventDefault();
+  const entrada = document.getElementById('tipo-triangulo-input').value;
+  const [a,b,c] = entrada.split(",").map(Number);
+  const out = document.getElementById('tipo-triangulo-output');
+  if (a+b>c && a+c>b && b+c>a) {
+    if (a===b && b===c) out.textContent = "Equilátero";
+    else if (a===b || a===c || b===c) out.textContent = "Isósceles";
+    else out.textContent = "Escaleno";
+  } else {
+    out.textContent = "Não forma triângulo";
+  }
+}
+
+function custoMacas(event) {
+  event.preventDefault();
+  const qtd = parseInt(document.getElementById('custo-macas-input').value);
+  const out = document.getElementById('custo-macas-output');
+  if (isNaN(qtd) || qtd <= 0) {
+    out.textContent = "Quantidade inválida";
+  } else {
+    const preco = qtd < 12 ? 0.30 : 0.25;
+    out.textContent = "Total: R$" + (preco * qtd).toFixed(2);
+  }
+}
+
+function ordemCrescente(event) {
+  event.preventDefault();
+  const entrada = document.getElementById('ordem-crescente-input').value;
+  const out = document.getElementById('ordem-crescente-output');
+  let numeros = entrada.split(",").map(n => Number(n.trim())).filter(n => !isNaN(n));
+  if (numeros.length < 2) {
+    out.textContent = "Digite ao menos dois números válidos separados por vírgula.";
+  } else {
+    numeros.sort((a, b) => a - b);
+    out.textContent = "Ordem crescente: " + numeros.join(", ");
+  }
+}
+
+function contagemRegressiva(event) {
+  event.preventDefault();
+  const input = document.getElementById('contagem-regressiva-input');
+  const valor = parseInt(input.value);
+  const out = document.getElementById('contagem-regressiva-output');
+  if (isNaN(valor) || valor < 1) {
+    out.textContent = "Digite um número inteiro maior que 0.";
+    return;
+  }
+  let resultado = "";
+  for (let i = valor; i >= 1; i--) {
+    resultado += i + (i > 1 ? ", " : "");
+  }
+  out.textContent = resultado;
+}
+
+function repetirNumero(event) {
+  event.preventDefault();
+  const valor = parseInt(document.getElementById('repetir-numero-input').value);
+  const out = document.getElementById('repetir-numero-output');
+  if (isNaN(valor)) {
+    out.textContent = "Número inválido.";
+  } else {
+    out.textContent = Array(10).fill(valor).join(", ");
+  }
+}
+
+function somaCinco(event) {
+  event.preventDefault();
+  const entrada = document.getElementById('soma-cinco-input').value;
+  let valores = entrada.split(",").map(n => parseFloat(n));
+  const out = document.getElementById('soma-cinco-output');
+  if (valores.length === 5 && valores.every(n => !isNaN(n))) {
+    const soma = valores.reduce((acc, n) => acc + n, 0);
+    out.textContent = "Soma total: " + soma;
+  } else {
+    out.textContent = "Digite exatamente 5 números válidos separados por vírgula.";
+  }
+}
+
+function calculaFatorial(event) {
+  event.preventDefault();
+  const valor = parseInt(document.getElementById('fatorial-input').value);
+  const out = document.getElementById('fatorial-output');
+  if (isNaN(valor) || valor < 0) {
+    out.textContent = "Número inválido.";
+  } else {
+    let fat = 1;
+    for (let i = 2; i <= valor; i++) {
+      fat *= i;
+    }
+    out.textContent = "Fatorial: " + fat;
+  }
+}
+
+function gerarFibonacci(event) {
+  event.preventDefault();
+  const input = document.getElementById('fibonacci-input');
+  const qtd = parseInt(input.value);
+  const out = document.getElementById('fibonacci-output');
+  if (isNaN(qtd) || qtd <= 0) {
+    out.textContent = "Digite um número inteiro positivo.";
+    return;
+  }
+  let fib = [0, 1];
+  for (let i = 2; i < qtd; i++) {
+    fib[i] = fib[i - 1] + fib[i - 2];
+  }
+  out.textContent = fib.slice(0, qtd).join(", ");
+}</script>
+</body>
+</html>
