@@ -238,7 +238,7 @@ body::before {
       transform: scale(1.04);
     }
     .program-output {
-      margin-top: 97px;
+      margin-top: 25px;
       color: #3b526a;
       font-size: 1.03rem;
       min-height: 23px;
@@ -347,7 +347,8 @@ body::before {
 </head>
 <body>
 <div class="youtube-bg-container">
-  <iframe src="https://www.youtube.com/embed/-tTglFYF1wo?autoplay=1&mute=1&controls=0&loop=1&playlist=-tTglFYF1wo&modestbranding=1&showinfo=0&rel=0" frameborder="0" allow="autoplay; fullscreen"
+  <iframe src="https://www.youtube.com/embed/-tTglFYF1wo?autoplay=1&mute=1&controls=0&loop=1&playlist=-tTglFYF1wo&modestbranding=1&showinfo=0&rel=0"
+    frameborder="0" allow="autoplay; fullscreen"
     allowfullscreen muted
     style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2; pointer-events: none;"></iframe>
 </div>
@@ -940,6 +941,49 @@ function gerarFibonacci(event) {
     fib[i] = fib[i - 1] + fib[i - 2];
   }
   out.textContent = fib.slice(0, qtd).join(", ");
-}</script>
+}
+
+function tabuada(event) {
+  event.preventDefault();
+  const num = Number(document.getElementById("tabuada-num").value);
+  let output = "";
+  for (let i = 1; i <= 10; i++) {
+    output += `${num} x ${i} = ${num * i}
+`;
+  }
+  document.getElementById("tabuada-output").innerText = output;
+}
+
+
+function faixaEtaria(event) {
+  event.preventDefault();
+  const idade = Number(document.getElementById("faixa-idade").value);
+  let faixa = "";
+  if (idade < 0) faixa = "Idade inválida";
+  else if (idade < 12) faixa = "Criança";
+  else if (idade < 18) faixa = "Adolescente";
+  else if (idade < 60) faixa = "Adulto";
+  else faixa = "Idoso";
+  document.getElementById("faixa-output").textContent = faixa;
+}
+
+function bissexto(event) {
+  event.preventDefault();
+  const ano = Number(document.getElementById("bissexto-ano").value);
+  const ehBissexto = (ano % 4 === 0 && ano % 100 !== 0) || (ano % 400 === 0);
+  document.getElementById("bissexto-output").textContent = ehBissexto ? "É bissexto" : "Não é bissexto";
+}
+
+function positivoNegativo(event) {
+  event.preventDefault();
+  const num = Number(document.getElementById("positivo-num").value);
+  let resultado = "";
+  if (num > 0) resultado = "Positivo";
+  else if (num < 0) resultado = "Negativo";
+  else resultado = "Zero";
+  document.getElementById("positivo-output").textContent = resultado;
+}
+
+</script>
 </body>
 </html>
